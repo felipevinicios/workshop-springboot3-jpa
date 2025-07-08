@@ -1,16 +1,20 @@
 package com.educandoweb.curso.entities;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 
 @Entity
-@Table 
+@Table(name = "tb_usario") 
+
 public class Usuario implements Serializable{
 	private static final long serialVersionUID = 1L;
 	
@@ -22,6 +26,9 @@ public class Usuario implements Serializable{
 	private String email;
 	private String telefone;
 	private String senha;
+	
+	@OneToMany(mappedBy = "client")
+	private List<Order> ordens = new ArrayList<>();
 	
 	public Usuario () {
 		
@@ -75,6 +82,9 @@ public class Usuario implements Serializable{
 	public void setSenha(String senha) {
 		this.senha = senha;
 	}
+	public List<Order> getOrdens() {
+		return ordens;
+	}
 
 	@Override
 	public int hashCode() {
@@ -92,6 +102,8 @@ public class Usuario implements Serializable{
 		Usuario other = (Usuario) obj;
 		return Objects.equals(id, other.id);
 	}
+
+	
 	
 		
 
